@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://graphics/floor_tile.png" type="Texture" id=1]
+[ext_resource path="res://scripts/StickMovement.gd" type="Script" id=2]
+[ext_resource path="res://graphics/voxel/VoxelImport.dae" type="PackedScene" id=3]
+
+[sub_resource type="CapsuleShape" id=1]
+
+[node name="MovementTest" type="Spatial"]
+
+[node name="Floor" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 12800, 12800 )
+
+[node name="Player" type="KinematicBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02, 39.1539 )
+script = ExtResource( 2 )
+
+[node name="Camera" type="Camera" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 0.997741, 0.0671794, 0, -0.0671794, 0.997741, 0, 1.056, -0.0239983 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 0.3, 0, 0, 0, -2.04263e-08, 0.467299, 0, -0.3, -1.31134e-08, 0, 0.475852, 0 )
+shape = SubResource( 1 )
+
+[node name="Voxel" parent="Player" instance=ExtResource( 3 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0 )
