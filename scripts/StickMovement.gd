@@ -8,7 +8,6 @@ var move_dir = Vector3.ZERO
 
 var speed = 3.0
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	InputMap.action_set_deadzone("left_stick_left", move_input_deadzone)
 	InputMap.action_set_deadzone("left_stick_right", move_input_deadzone)
@@ -20,9 +19,10 @@ func _process(delta):
 	move_input.z = Input.get_action_strength("left_stick_down") - Input.get_action_strength("left_stick_up")
 	
 	if Vector3.ZERO.distance_to(move_input) > move_deadzone*sqrt(2.0):
+		#if you want to check input for walking and running speeds, do it here
 		move_dir = move_input.normalized()
 	else:
 		move_dir = Vector3.ZERO
 
 func _physics_process(delta):
-	move_and_slide(move_input*speed)
+	move_and_slide(move_dir*speed)
